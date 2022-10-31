@@ -22,7 +22,7 @@ document.querySelector("#play").addEventListener("click", function() {
 	video.play();
 	// update the volume value, actual value and value shown on screen
 	volume.value = volslider.value;
-	volume.textContent = volume.value;
+	volume.textContent = volume.value + "%";
 	// check value using console
 	console.log("volume is " + volume.value)
 	
@@ -35,71 +35,92 @@ document.querySelector("#play").addEventListener("click", function() {
 	video.pause();
  })
 
+ // what happens when you click the slow down button
 document.querySelector("#slower").addEventListener("click", function(){
 	console.log("slow down button clicked")
-	video.playbackRate = video.playbackRate - 0.10
+	// decreasing the video speed by 10%
+	video.playbackRate = video.playbackRate - .10
+	// checking value with console
 	console.log("new video speed is " + video.playbackRate)
 })
 
+//what happens when speed up button clicked
 document.querySelector("#faster").addEventListener("click", function(){
 	console.log("speed up button clicked")
-	video.playbackRate = video.playbackRate + 0.10
+	//increasing video speed by 10%
+	video.playbackRate = video.playbackRate + .10
+	// checking value with console
 	console.log("new video speed is " + video.playbackRate)
 })
 
+//what happens when skip button clicked
 document.querySelector("#skip").addEventListener("click",function(){
 	console.log("skip button clicked")
+	// recording new time, and splitting it into minutes and seconds
 	newtime = video.currentTime + 10;
 	vidmin = Math.floor(newtime /60);
 	vidsec = newtime % 60;
-	
+	//what happens if you try to skip beyond the end of the video
 	if (newtime >= video.duration){
 		console.log("goes beyond the end of the video, back to beginning")
 		video.currentTime = 0;
 		console.log("new video time will be 0 minutes and 0 seconds")
 
 	}
+	//simply skipping ahead
 	else{
 		console.log("skipping ahead!")
 		video.currentTime = newtime;
 		console.log("new video time will be " + vidmin + " minutes and " +vidsec+" seconds")
 	}
 })
-clicknum = 0;
+
+
 
 
 
 document.querySelector('#mute').addEventListener("click", function(){
+	//what happens if video is not muted yet, and you want to mute it
 	if (video.muted == false){
 		console.log("mute")
+		//muting
 		video.muted = true;
+		//setting text and slider value to match
 		volume.textContent = 0;
 		volslider.value = 0;
+		//changing button value to unmute
+		document.querySelector('#mute').textContent = "Unmute"
 	}
+	// what happens if video is already muted, and you want to unmute it
 	else{
 		console.log("unmute")
+		// unmute
 		video.muted = false;
+		//setting text and slider value to match
 		volume.textContent = volume.value;
 		volslider.value = volume.value;
+		//changing button value to unmute
+		document.querySelector('#mute').textContent = "Mute"
 	}
 	
 })
 
+//what happens when volume slider is changed
 volslider.addEventListener("change", function(){
 	console.log("slider was changed")
+	//changing volume value and text based on slider value 
 	volume.value = volslider.value;
+	volume.textContent = volume.value+"%"
+	//checking with console
 	console.log("new volume is " + volume.value)
-	volume.textContent = volume.value
+	
 })
+
 
 document.querySelector("#vintage").addEventListener("click",function(){
 	console.log("we are going old school")
-	if(video.classList.contains("oldSchool")){
-		video.classList.remove("oldSchool")
-	}
-	else{
-		video.classList.add("oldSchool")
-	}
+	video.classList.add("oldSchool")
+	
 	
 })
 
