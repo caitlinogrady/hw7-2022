@@ -24,6 +24,7 @@ document.querySelector("#play").addEventListener("click", function() {
 	volslider.value = volslider.value;
 	volume.value = volslider.value;
 	volume.textContent = volume.value + "%";
+	video.volume = volume.value /100;
 	// check value using console
 	console.log("volume is " + volume.value)
 	
@@ -90,6 +91,7 @@ document.querySelector('#mute').addEventListener("click", function(){
 		volume.textContent = 0+"%";
 		oldvol = volume.value;
 		volslider.value = 0;
+		
 		//changing button value to unmute
 		document.querySelector('#mute').textContent = "Unmute"
 	}
@@ -99,8 +101,10 @@ document.querySelector('#mute').addEventListener("click", function(){
 		// unmute
 		video.muted = false;
 		//setting text and slider value to match
+		volume.value = oldvol;
 		volume.textContent = volume.value + "%";
 		volslider.value = volume.value;
+		video.volume = volume.value /100;
 		//changing button value to unmute
 		document.querySelector('#mute').textContent = "Mute"
 	}
