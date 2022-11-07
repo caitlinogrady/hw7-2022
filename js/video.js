@@ -21,6 +21,7 @@ document.querySelector("#play").addEventListener("click", function() {
 	//play video
 	video.play();
 	// update the volume value, actual value and value shown on screen
+	volslider.value = volslider.value;
 	volume.value = volslider.value;
 	volume.textContent = volume.value + "%";
 	// check value using console
@@ -86,7 +87,8 @@ document.querySelector('#mute').addEventListener("click", function(){
 		//muting
 		video.muted = true;
 		//setting text and slider value to match
-		volume.textContent = 0;
+		volume.textContent = 0+"%";
+		oldvol = volume.value;
 		volslider.value = 0;
 		//changing button value to unmute
 		document.querySelector('#mute').textContent = "Unmute"
@@ -97,7 +99,7 @@ document.querySelector('#mute').addEventListener("click", function(){
 		// unmute
 		video.muted = false;
 		//setting text and slider value to match
-		volume.textContent = volume.value;
+		volume.textContent = volume.value + "%";
 		volslider.value = volume.value;
 		//changing button value to unmute
 		document.querySelector('#mute').textContent = "Mute"
@@ -110,21 +112,25 @@ volslider.addEventListener("change", function(){
 	console.log("slider was changed")
 	//changing volume value and text based on slider value 
 	volume.value = volslider.value;
+	console.log("slider val is "+ volslider.value)
 	volume.textContent = volume.value+"%"
 	//checking with console
 	console.log("new volume is " + volume.value)
 	
 })
 
-
+// what happens when old school button clicked
 document.querySelector("#vintage").addEventListener("click",function(){
 	console.log("we are going old school")
+	// adding oldSchool class to video 
 	video.classList.add("oldSchool")
 	
 	
 })
 
+//what happens when original button clicked
 document.querySelector("#orig").addEventListener("click",function(){
 	console.log("we are going back to basic")
+	//removing oldSchool class from video
 	video.classList.remove("oldSchool")
 })
