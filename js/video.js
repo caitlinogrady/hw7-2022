@@ -114,6 +114,7 @@ volslider.addEventListener("change", function(){
 	volume.value = volslider.value;
 	console.log("slider val is "+ volslider.value)
 	volume.textContent = volume.value+"%"
+	video.volume = volume.value;
 	//checking with console
 	console.log("new volume is " + volume.value)
 	
